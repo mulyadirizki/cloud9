@@ -35,10 +35,10 @@
                     <div class="x_title">
                         <h2>Data<small>Pelanggan</small></h2>
                         <div class="form-group float-right row">
-                            <select name="area" id="area" class="form-control">
-                                <option selected value="Pilih Area">Pilih Area</option>
-                                @foreach($area as $value) 
-                                    <option value="{{ $value->id }}"> {{ strtoupper($value->nama_area) }}</option>
+                            <select name="perumahan" id="perumahan" class="form-control">
+                                <option selected value="Pilih Area">Pilih Perumahan</option>
+                                @foreach($perumahan as $value) 
+                                    <option value="{{ $value->id }}"> {{ strtoupper($value->nama_perumahan) }}</option>
                                 @endforeach;
                             </select>
                         </div>
@@ -93,10 +93,11 @@
             serverSide: true,
             ajax: {
                 url:"{{ route('getPelangganNotVerify') }}",
-                data:{
-                    _token:"{{csrf_token()}}"
-                },
-                type:"GET"
+                type:"GET",
+                data: function (d) {
+                    d.perumahan = $('#perumahan').val(),
+                    _token = "{{csrf_token()}}"
+                }
             },
             columns: [
                 {data: 'id_pelanggan', name: 'id_pelanggan'},
@@ -116,6 +117,10 @@
                 {data: 'status', name: 'status'},
                 {data: 'message', name: 'message'},
             ]
+        });
+
+        $('#perumahan').change(function(){
+            table.draw();
         });
 
     </script>

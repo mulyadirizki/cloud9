@@ -34,14 +34,20 @@
                 {{--  <li><a href="{{ route('data-pelanggan.putus-permanen') }}">Pelanggan Putus Permanen</a></li>  --}}
               </ul>
             </li>
-            {{--  <li><a><i class="fa fa-map-marker"></i>Data Area<span class="fa fa-chevron-down"></span></a>
+            <li><a><i class="fa fa-map-marker"></i>Data Perumahan<span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
-                <li><a href="{{ route('data-area.index') }}">Data Area</a></li>
+                <li><a href="{{ route('data-perumahan.index') }}">Data Perumahan</a></li>
               </ul>
-            </li>  --}}
+            </li>
             <li><a><i class="fa fa-money"></i>Pembayaran<span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
                 <li><a href="{{ route('konfirmasi-pembayaran.index') }}">Konfirmasi Pembayaran</a></li>
+                <li><a href="{{ route('cekPembayaran') }}">Cek Pembayaran</a></li>
+              </ul>
+            </li>
+            <li><a><i class="fa fa-print"></i>Invoice<span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu">
+                <li><a href="{{ route('invoice.index') }}">Cetak Invoice</a></li>
               </ul>
             </li>
           </ul>

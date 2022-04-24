@@ -8,9 +8,10 @@ use GuzzleHttp\Middleware;
 
 // to backend
 use App\Http\Controllers\Backend\MainController;
-use App\Http\Controllers\Backend\AreaController;
+use App\Http\Controllers\Backend\PerumahanController;
 use App\Http\Controllers\Backend\PelangganController;
 use App\Http\Controllers\Backend\PembayaranController;
+use App\Http\Controllers\Backend\InvoiceController;
 
 // to Owne
 use App\Http\Controllers\owner\PelController;
@@ -46,14 +47,24 @@ Route::group([ 'prefix' => 'admin' ,'middleware' => 'isAdmin'], function() {
     Route::get('data-pelanggan/status/terputus', [PelangganController::class, 'getPelTerputus'])->name('data-pelanggan.terputus');
     Route::get('data-pelanggan/putus-permanen', [PelangganController::class, 'getPelPutus'])->name('data-pelanggan.putus-permanen');
 
-    Route::post('data-pelanggan/filter', [PelangganController::class, 'areaPelanggan'])->name('areaPelanggan');
+    Route::post('data-pelanggan/filter', [PelangganController::class, 'perumahanPelanggan'])->name('perumahanPelanggan');
+    Route::get('data-pelanggan/perumahan', [PelangganController::class, 'getPerumahan'])->name('getPerumahan');
     Route::post('data-pelanggan/import', [PelangganController::class, 'fileImport'])->name('importExcel');
 
-    Route::resource('data-area', AreaController::class);
+    Route::resource('data-perumahan', PerumahanController::class);
+
+
     Route::resource('konfirmasi-pembayaran', PembayaranController::class);
-    Route::post('konfirmasi-pembayaran/update', [PembayaranController::class, 'updateStatus'])->name('updateStatus');
-    Route::post('konfirmasi-pembayaran/cancel', [PembayaranController::class, 'cancelKonfirmasi'])->name('cancelKonfirmasi');
+    Route::post('konfirmasi-pembayaran/proses', [PembayaranController::class, 'prosesPembayaran'])->name('konfirmasi-pembayaran.proses');
+    Route::get('konfirmasi-pembayaran/{id}/edit', [PembayaranController::class, 'edit'])->name('edit');
+    Route::delete('konfirmasi-pembayaran/cancel', [PembayaranController::class, 'cancelKonfirmasi'])->name('cancelKonfirmasi');
     Route::post('konfirmasi-pembayaran/filter', [PembayaranController::class, 'filterBulan'])->name('filterBulan');
+    Route::post('konfirmasi-pembayaran/search', [PembayaranController::class, 'showPelanggan'])->name('konfirmasi-pembayaran.search');
+
+    Route::get('cek-pembayaran', [PembayaranController::class, 'cekPembayaran'])->name('cekPembayaran');
+
+    Route::get('invoice', [InvoiceController::class, 'index'])->name('invoice.index');
+    Route::get('invoice/print-all', [InvoiceController::class, 'printAll'])->name('printAll');
 });
 
 Route::group(['prefix' => 'owner', 'middleware' => 'isOwner'], function() {

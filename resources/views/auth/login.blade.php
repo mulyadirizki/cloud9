@@ -1,125 +1,83 @@
 <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @stack('meta')
     
-    <title> CludNine </title>
-    
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
-    <link href="{{ url('assets/build/css/nucleo-icons.css') }}" rel="stylesheet">
-    <link href="{{ url('assets/build/css/nucleo-svg.css') }}" rel="stylesheet">
+    <title> CluodNine </title>
+
+    <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
     <link href="{{ url('assets/build/css/login.css') }}" rel="stylesheet">
-  </head>
-  
-  <body class="">
-    <div class="container position-sticky z-index-sticky top-0">
-      <div class="row">
-        <div class="col-12">
-          <!-- Navbar -->
-          <nav class="navbar navbar-expand-lg blur blur-rounded top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
-            <div class="container-fluid">
-              <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="../pages/dashboard.html">
-                Cloud 9
-              </a>
-              <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon mt-2">
-                  <span class="navbar-toggler-bar bar1"></span>
-                  <span class="navbar-toggler-bar bar2"></span>
-                  <span class="navbar-toggler-bar bar3"></span>
-                </span>
-              </button>
-              <div class="collapse navbar-collapse" id="navigation">
-                <ul class="navbar-nav mx-auto">
-                  <li class="nav-item">
-                    <a class="nav-link me-2" href="../pages/sign-in.html">
-                      <i class="fas fa-key opacity-6 text-dark me-1"></i>
-                      Sign In
-                    </a>
-                  </li>
-                </ul>
-                <ul class="navbar-nav d-lg-block d-none">
-                  <li class="nav-item">
-                    <a href="#" class="btn btn-sm btn-round mb-0 me-1 bg-gradient-dark">Reliable</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav>
-          <!-- End Navbar -->
-        </div>
-      </div>
-    </div>
-    <main class="main-content  mt-0">
-      <section>
-        <div class="page-header min-vh-75">
-          <div class="container">
-            <div class="row">
-              <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
-                <div class="card card-plain mt-8">
-                  <div class="card-header pb-0 text-left bg-transparent">
-                    <h3 class="font-weight-bolder text-info text-gradient">Login</h3>
-                    <p class="mb-0">Enter your email and password to sign in</p>
-                  </div>
-                  <div class="card-body">
-                    <form role="form" method="POST" action="{{ route('login') }}">
-                      @csrf
-                      <label>Email</label>
-                      <div class="mb-3">
-                        <input id="email" type="email" class="form-control  @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email" autofocus aria-describedby="email-addon">
-                        @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                      </div>
-                      <label>Password</label>
-                      <div class="mb-3">
-                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
-                        @error('password')
-                          <span class="invalid-feedback" role="alert">
-                              <strong>{{ $message }}</strong>
-                          </span>
-                        @enderror
-                      </div>
-                      <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
-                        <label class="form-check-label" for="rememberMe">Remember me</label>
-                      </div>
-                    </form>
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-login bg-gradient-info w-100 mt-4 mb-0">{{ __('Sign in') }}</button>
+</head>
+<body oncontextmenu='return false' class='snippet-body'>
+    <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+        <div class="card card0 border-0">
+            <div class="row d-flex">
+                <div class="col-lg-6">
+                    <div class="card1 pb-5">
+                        <div class="row"> 
+                            <img src="https://i.imgur.com/CXQmsmF.png" class="logo"> 
+                        </div>
+                        <div class="row px-3 justify-content-center mt-4 mb-5 border-line"> 
+                            <img src="https://i.imgur.com/uNGdWHi.png" class="image"> 
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
-              <div class="col-md-6">
-                <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
-                  <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('assets/images/curved-images/curved6.jpg')"></div>
+                <div class="col-lg-6">
+                    <div class="card2 card border-0 px-4 py-5">
+                          <div class="row mb-4 px-3">
+                            <h6 class="mb-0 mr-4 mt-2">Cloud9 </h6>
+                            {{--  <div class="facebook text-center mr-3">
+                                <div class="fa fa-facebook"></div>
+                            </div>
+                            <div class="twitter text-center mr-3">
+                                <div class="fa fa-twitter"></div>
+                            </div>
+                            <div class="linkedin text-center mr-3">
+                                <div class="fa fa-linkedin"></div>
+                            </div>  --}}
+                        </div>  
+                        <div class="row px-3 mb-4">
+                            <div class="line"></div> <small class="or text-center">Login</small>
+                            <div class="line"></div>
+                        </div>
+                        <form role="form" method="POST" action="{{ route('login') }}">
+                            @csrf
+                            <div class="row px-3"> <label class="mb-1">
+                                <h6 class="mb-0 text-sm">Email Address</h6>
+                                </label> <input id="email" class="mb-4 @error('email') is-invalid @enderror" type="email" name="email" placeholder="Enter a valid email address" value="{{ old('email') }}" required autocomplete="email" autofocus aria-describedby="email-addon"> 
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="row px-3"> <label class="mb-1">
+                                <h6 class="mb-0 text-sm">Password</h6>
+                                </label> <input id="password" class="@error('password') is-invalid @enderror" type="password" name="password" placeholder="Enter password" required autocomplete="current-password" aria-label="Password" aria-describedby="password-addon"> 
+                            </div>
+                            <div class="row px-3 mb-4">
+                                <div class="custom-control custom-checkbox custom-control-inline"> <input id="chk1" type="checkbox" name="chk" class="custom-control-input"> <label for="chk1" class="custom-control-label text-sm">Remember me</label> </div> <a href="#" class="ml-auto mb-0 text-sm">Forgot Password?</a>
+                            </div>
+                        </form>
+                        <div class="row mb-3 px-3"> <button type="submit" class="btn btn-login btn-blue text-center">Login</button> </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
+            <div class="bg-blue py-4">
+                <div class="row px-3"> <small class="ml-4 ml-sm-5 mb-2">Copyright &copy; 2022. All rights reserved.</small>
+                    <div class="social-contact ml-4 ml-sm-auto"> <span class="fa fa-facebook mr-4 text-sm"></span> <span class="fa fa-google-plus mr-4 text-sm"></span> <span class="fa fa-linkedin mr-4 text-sm"></span> <span class="fa fa-twitter mr-4 mr-sm-5 text-sm"></span> </div>
+                </div>
+            </div>
         </div>
-      </section>
-    </main>
-    <footer class="footer py-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-8 mx-auto text-center mt-1">
-            <p class="mb-0 text-secondary">
-              Copyright © <script>
-                document.write(new Date().getFullYear())
-              </script> Soft by CloudNine.
-            </p>
-          </div>
-        </div>
-      </div>
-    </footer>
+    </div>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
     <script src="{{ url('assets/build/js/core/popper.min.js') }}"></script>
     <script src="{{ url('assets/build/js/core/bootstrap.min.js') }}"></script>
     <script src="{{ url('assets/build/js/plugins/perfect-scrollbar.min.js') }}"></script>
@@ -130,109 +88,115 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
-      var win = navigator.platform.indexOf('Win') > -1;
-      if (win && document.querySelector('#sidenav-scrollbar')) {
-        var options = {
-          damping: '0.5'
+        $.ajaxSetup({
+          headers:{
+              'X-CSRF-TOKEN': $("meta[name='csrf-token']").attr('content')
+          },
+        });
+  
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+          var options = {
+            damping: '0.5'
+          }
+          Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
-        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-      }
-
-      $(document).ready(function() {
-        
-        $('.btn-login').click(function() {
-          var email = $('#email').val();
-          var password = $('#password').val();
-          var token = $("meta[name='csrf-token']").attr('content');
-
-          if(email.length == ""){
-            Swal.fire({
-              icon: 'warning',
-              title: 'Oops...',
-              text: 'Email Wajib diisi',
-            })
-          }else if(password.length == ""){
-            Swal.fire({
-              icon: 'warning',
-              title: 'Oops...',
-              text: 'Password Wajib Diisi !'
-            });
-          }else{
-
-            $.ajax({
-
-              url: "{{ route('prosesLogin') }}",
-              type: 'POST',
-              dataType: 'JSON',
-              cache: false,
-              data: {
-                'email': email,
-                'password': password,
-                '_token': token
-              },
-              success: function(response) {
-                if(response.qwerty == 0){
-                  if (response.success) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Login Berhasil!',
-                        text: 'Anda akan di arahkan dalam 3 Detik',
-                        timer: 3000,
-                        showCancelButton: false,
-                        showConfirmButton: false
-                    })
-                    
-                    .then (function () {
-                        window.location.href = "{{ route('admin') }}";
-                    });
-                  } else {
+  
+        $(document).ready(function() {
+          
+          $('.btn-login').click(function() {
+            var email = $('#email').val();
+            var password = $('#password').val();
+            var token = $("meta[name='csrf-token']").attr('content');
+  
+            if(email.length == ""){
+              Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Email Wajib diisi',
+              })
+            }else if(password.length == ""){
+              Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Password Wajib Diisi !'
+              });
+            }else{
+  
+              $.ajax({
+  
+                url: "{{ route('prosesLogin') }}",
+                type: 'POST',
+                dataType: 'JSON',
+                cache: false,
+                data: {
+                  'email': email,
+                  'password': password,
+                  '_token': token
+                },
+                success: function(response) {
+                  if(response.qwerty == 0){
+                    if (response.success) {
+                      Swal.fire({
+                          icon: 'success',
+                          title: 'Login Berhasil!',
+                          text: 'Anda akan di arahkan dalam 3 Detik',
+                          timer: 3000,
+                          showCancelButton: false,
+                          showConfirmButton: false
+                      })
+                      
+                      .then (function () {
+                          window.location.href = "{{ route('admin') }}";
+                      });
+                    } else {
+                        console.log(response.success);
+  
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Login Gagal!',
+                            text: 'silahkan coba lagi!'
+                        });
+                    }
+                  }else if(response.qwerty == 1) {
+                    if (response.success) {
+                      Swal.fire({
+                          icon: 'success',
+                          title: 'Login Berhasil!',
+                          text: 'Anda akan di arahkan dalam 3 Detik',
+                          timer: 3000,
+                          showCancelButton: false,
+                          showConfirmButton: false
+                      })
+                      
+                      .then (function () {
+                          window.location.href = "{{ route('owner') }}";
+                      });
+                    } else {
                       console.log(response.success);
-
+  
                       Swal.fire({
                           icon: 'error',
                           title: 'Login Gagal!',
                           text: 'silahkan coba lagi!'
                       });
+  
+                    }
                   }
-                }else if(response.qwerty == 1) {
-                  if (response.success) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Login Berhasil!',
-                        text: 'Anda akan di arahkan dalam 3 Detik',
-                        timer: 3000,
-                        showCancelButton: false,
-                        showConfirmButton: false
-                    })
-                    
-                    .then (function () {
-                        window.location.href = "{{ route('owner') }}";
-                    });
-                  } else {
-                    console.log(response.success);
-
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Login Gagal!',
-                        text: 'silahkan coba lagi!'
-                    });
-
-                  }
+                },
+                error: function(e) {
+                  Swal.fire({
+                      icon: 'error',
+                      title: 'Error',
+                      text: 'Invalid Email or Password',
+                  })
                 }
-              },
-              error: function(e) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'Invalid Email or Password',
-                })
-              }
-
-            });
-          }
-        })
-
-      });
-    </script>
-  </body>
-  </html>
+  
+              });
+            }
+          })
+  
+        });
+      </script>
+</body>
+</html>

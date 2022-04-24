@@ -35,10 +35,10 @@
                     <div class="x_title">
                         <h2>Data<small>Pelanggan Dihapus</small></h2>
                         <div class="form-group float-right row">
-                            <select name="area" id="area" class="form-control">
-                                <option selected value="Pilih Area">Pilih Area</option>
-                                @foreach($area as $value) 
-                                    <option value="{{ $value->id }}"> {{ strtoupper($value->nama_area) }}</option>
+                            <select name="perumahan" id="perumahan" class="form-control">
+                                <option selected value="0">Pilih Perumahan</option>
+                                @foreach($perumahan as $value) 
+                                    <option value="{{ $value->id }}"> {{ strtoupper($value->nama_perumahan) }}</option>
                                 @endforeach;
                             </select>
                         </div>
@@ -53,6 +53,7 @@
                                             <tr>
                                                 <th>ID Pelanggan</th>
                                                 <th>Nama Pelanggan</th>
+                                                <th>Perumahan</th>
                                                 <th>Alamat</th>
                                                 <th>Tagihan</th>
                                                 <th>NET/Mbps</th>
@@ -96,14 +97,16 @@
             serverSide: true,
             ajax: {
                 url:"{{ route('getPelangganTerputus') }}",
-                data:{
-                    _token:"{{csrf_token()}}"
-                },
-                type:"GET"
+                type:"GET",
+                data: function (d) {
+                    d.perumahan = $('#perumahan').val(),
+                    _token = "{{csrf_token()}}"
+                }
             },
             columns: [
                 {data: 'id_pelanggan', name: 'id_pelanggan'},
                 {data: 'nama_pelanggan', name: 'nama_pelanggan'},
+                {data: 'nama_perumahan', name: 'nama_perumahan'},
                 {data: 'alamat', name: 'alamat'},
                 {data: 'tagihan', name: 'tagihan'},
                 {data: 'paket', name: 'paket'},
@@ -124,47 +127,8 @@
             ]
         });
 
-        $('#area').on('change', function(){
-            let select=$("#area").children("option:selected").val();
-            var  areaID = $(this).val();
-            $.ajax({
-                url: "{{ route('areaPelanggan') }}",
-                type: "POST",
-                dataType: "JSON",
-                data: {
-                    areaID: areaID,
-                },
-                success: function(data) {
-                    console.log(data);
-                    $('#data-pelanggan tbody').children().remove();
-                    var tableROW =  '<tr>';
-                    $.each(data, function(i, item){
-                        tableROW += '<tr>';
-                            tableROW += 	'<td class="text-center">'+item.id_pelanggan+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.nama_pelanggan+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.alamat+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.tagihan+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.paket+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.merk_modem+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.sn_modem+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.tv+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.sn+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.chip_id+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.tgl_pemasangan+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.tgl_tagihan+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.telp_hp+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.user_id+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.password+'</td>';
-                            tableROW += 	'<td class="text-center"><a href="javascript:void(0)" data-toggle="tooltip" data-id="'+item.id+'" data-status="'+item.id+'" data-toggle="tooltip"  data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i> Edit</a><button class="delete btn btn-danger btn-sm" data-id="'+item.id+'" data-status="'+item.id+'" type="button"><i class="far fa-trash-alt"></i> Delete</button> </td>';
-                        tableROW += '</tr>';
-                    });
-                    $('#data-pelanggan tbody').html(tableROW);
-                    if(select=="Pilih Area"){
-                        $('#data-pelanggan').DataTable().ajax.reload();
-                    }
-                }
-                
-            });
+        $('#perumahan').change(function(){
+            table.draw();
         });
 
         $(document).on('click', '.delete', function () {

@@ -32,7 +32,7 @@ class PelangganImport implements ToModel, WithStartRow, WithHeadingRow
         Pelanggan::create([
             'id_pelanggan' => $kodeBaru,
             'nama_pelanggan' => $row['nama'],
-            'perumahan' => $row[2],
+            'perumahan_id' => $row['perumahan'],
             'alamat' => $row['nama_blok'],
             'tagihan' => $row['tagihan'],
             'paket' => $row['net_mbps'],
@@ -42,7 +42,7 @@ class PelangganImport implements ToModel, WithStartRow, WithHeadingRow
             'tgl_pemasangan' => $row['tgl_pasang'],
             'tgl_tagihan' => $row['jt_tempo_tgl'],
             'telp_hp' => $row['telp_hp'],
-            'status' => '0',
+            'status' => '1',
         ]);
 
         $petugas = Auth::user()->name;

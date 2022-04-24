@@ -30,13 +30,13 @@
 
         <div class="clearfix"></div>
         
-        <button type="button" class="btn btn-add btn-primary btn-sm" data-toggle="modal" data-target=".bs-example-modal-lg">Tambah Area</button>
+        <button type="button" class="btn btn-add btn-primary btn-sm" data-toggle="modal" data-target=".bs-example-modal-lg">Tambah Perumahan</button>
 
         <div class="row">
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Data<small>Area</small></h2>
+                        <h2>Data<small>Perumahan</small></h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
                             <li class="dropdown">
@@ -54,11 +54,11 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
-                                    <table id="data-area" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                    <table id="data-perumahan" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Nama Area</th>
+                                                <th>Nama Perumahan</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -79,7 +79,7 @@
                 <div class="col-md-12 col-sm-12 ">
                     <div class="x_panel">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Data Area</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Data Perumahan</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
@@ -91,10 +91,10 @@
                                     {{ csrf_field() }}
                                     <input type="hidden" name="id" id="id">
                                     <div class="item form-group">
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nama Area <span class="required">*</span>
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nama Perumahan <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input type="text" id="nama_area" name="nama_area" required="required" class="form-control ">
+                                            <input type="text" id="nama_perumahan" name="nama_perumahan" required="required" class="form-control ">
                                         </div>
                                     </div>
                                     <div class="ln_solid"></div>
@@ -147,11 +147,11 @@
             },
         });
 
-        var table = $('#data-area').DataTable({
+        var table = $('#data-perumahan').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
-                url:"{{ route('data-area.index') }}",
+                url:"{{ route('data-perumahan.index') }}",
                 data:{
                     _token:"{{csrf_token()}}"
                 },
@@ -162,7 +162,7 @@
                   data: 'DT_RowIndex', 
                   name: 'DT_RowIndex'
                 },
-                {data: 'nama_area', name: 'nama_area'},
+                {data: 'nama_perumahan', name: 'nama_perumahan'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });
@@ -178,14 +178,14 @@
             event.preventDefault();
 
             let id = $('#id').val();
-            let nama_area = $('#nama_area').val();
+            let nama_perumahan = $('#nama_perumahan').val();
 
             $.ajax({
-                url: "{{ route('data-area.store') }}",
+                url: "{{ route('data-perumahan.store') }}",
                 type: 'POST',
                 data: {
                     id: id,
-                    nama_area: nama_area,
+                    nama_perumahan: nama_perumahan,
                 },
                 dataType: 'JSON',
 
@@ -213,18 +213,18 @@
                 }
             });
 
-            $('#data-area').DataTable().ajax.reload();
+            $('#data-perumahan').DataTable().ajax.reload();
         });
 
         $('body').on('click', '.edit-post', function () {
             var data_id = $(this).data('id');
-            $.get('data-area/' + data_id + '/edit ', function (data) {
+            $.get('data-perumahan/' + data_id + '/edit ', function (data) {
                 $('#modal-judul').html("Edit Post");
                 $('#btn-submit').val("edit-post");
                 $('#modal-add').modal('show');
 
                 $('#id').val(data.id);
-                $('#nama_area').val(data.nama_area);
+                $('#nama_perumahan').val(data.nama_perumahan);
             })
         });
 
@@ -235,7 +235,7 @@
 
         $('#tombol-hapus').click(function () {
             $.ajax({
-                url: "data-area/" + dataId, 
+                url: "data-perumahan/" + dataId, 
                 type: 'delete',
                 beforeSend: function () {
                     $('#tombol-hapus').text('Hapus Data'); 
@@ -243,7 +243,7 @@
                 success: function (data) { 
                     setTimeout(function () {
                         $('#konfirmasi-modal').modal('hide'); 
-                        var oTable = $('#data-area').dataTable();
+                        var oTable = $('#data-perumahan').dataTable();
                         oTable.fnDraw(false); 
                     });
                     iziToast.success({ 
@@ -261,7 +261,7 @@
                     $('#konfirmasi-modal').modal('hide'); 
                 }
             })
-            $('#data-area').DataTable().ajax.reload();
+            $('#data-perumahan').DataTable().ajax.reload();
         });
     </script>
 @endpush

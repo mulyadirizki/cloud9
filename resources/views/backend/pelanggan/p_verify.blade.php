@@ -36,11 +36,11 @@
                     <div class="x_title">
                         <h2>Data<small>Pelanggan</small></h2>
                         <div class="form-group float-right row">
-                            <select name="area" id="area" class="form-control">
-                                <option selected value="Pilih Area">Pilih Area</option>
-                                @foreach($area as $value) 
-                                    <option value="{{ $value->id }}"> {{ strtoupper($value->nama_area) }}</option>
-                                @endforeach;
+                            <select name="perumahan" id="perumahan" class="form-control">
+                                <option selected value="0">Pilih Perumahan</option>
+                                @foreach ($perumahan as $item)
+                                    <option value="{{ $item->id }}" >{{ $item->nama_perumahan }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="clearfix"></div>
@@ -52,8 +52,10 @@
                                     <table id="data-pelanggan" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
+                                                <th>No</th>
                                                 <th>ID Pelanggan</th>
                                                 <th>Nama Pelanggan</th>
+                                                <th>Perumahan</th>
                                                 <th>Alamat</th>
                                                 <th>Tagihan</th>
                                                 <th>NET/Mbps</th>
@@ -110,7 +112,12 @@
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="area">Perumahan <span class="required">*</span>
                                         </label>
                                         <div class="col-md-8 col-sm-8 ">
-                                            <input type="text" id="perumahan" name="perumahan" required="required" class="form-control ">
+                                            <select name="perumahan_id" id="perumahan_id" class="form-control">
+                                                <option selected >Pilih Perumahan</option>
+                                                @foreach ($perumahan as $item)
+                                                    <option value="{{ $item->id }}" >{{ $item->nama_perumahan }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="item form-group">
@@ -308,15 +315,20 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url:"{{ route('data-pelanggan.verify') }}",
-                data:{
-                    _token:"{{csrf_token()}}"
-                },
-                type:"GET"
+              url: "{{ route('data-pelanggan.verify') }}",
+              data: function (d) {
+                    d.perumahan = $('#perumahan').val(),
+                    _token = "{{csrf_token()}}"
+                }
             },
             columns: [
+                {
+                    data: 'DT_RowIndex', 
+                    name: 'DT_RowIndex'
+                  },
                 {data: 'id_pelanggan', name: 'id_pelanggan'},
                 {data: 'nama_pelanggan', name: 'nama_pelanggan'},
+                {data: 'nama_perumahan', name: 'nama_perumahan'},
                 {data: 'alamat', name: 'alamat'},
                 {data: 'tagihan', name: 'tagihan'},
                 {data: 'paket', name: 'paket'},
@@ -334,48 +346,9 @@
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });
-
-        $('#area').on('change', function(){
-            let select=$("#area").children("option:selected").val();
-            var  areaID = $(this).val();
-            $.ajax({
-                url: "{{ route('areaPelanggan') }}",
-                type: "POST",
-                dataType: "JSON",
-                data: {
-                    areaID: areaID,
-                },
-                success: function(data) {
-                    console.log(data);
-                    $('#data-pelanggan tbody').children().remove();
-                    var tableROW =  '<tr>';
-                    $.each(data, function(i, item){
-                        tableROW += '<tr>';
-                            tableROW += 	'<td class="text-center">'+item.id_pelanggan+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.nama_pelanggan+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.alamat+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.tagihan+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.paket+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.merk_modem+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.sn_modem+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.tv+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.sn+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.chip_id+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.tgl_pemasangan+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.tgl_tagihan+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.telp_hp+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.user_id+'</td>';
-                            tableROW += 	'<td class="text-center">'+item.password+'</td>';
-                            tableROW += 	'<td class="text-center"><a href="javascript:void(0)" data-toggle="tooltip" data-id="'+item.id+'" data-status="'+item.id+'" data-toggle="tooltip"  data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i> Edit</a><button class="delete btn btn-danger btn-sm" data-id="'+item.id+'" data-status="'+item.id+'" type="button"><i class="far fa-trash-alt"></i> Delete</button> </td>';
-                        tableROW += '</tr>';
-                    });
-                    $('#data-pelanggan tbody').html(tableROW);
-                    if(select=="Pilih Area"){
-                        $('#data-pelanggan').DataTable().ajax.reload();
-                    }
-                }
-                
-            });
+      
+        $('#perumahan').change(function(){
+            table.draw();
         });
 
         $(document).ready(function(){
@@ -409,7 +382,7 @@
 
                 $('#id_pelanggan').val(data.id_pelanggan);
                 $('#nama_pelanggan').val(data.nama_pelanggan);
-                $('#perumahan').val(data.perumahan);
+                $('#perumahan_id').val(data.perumahan_id);
                 $('#alamat').val(data.alamat);
                 $('#tagihan').val(data.tagihan);
                 $('#paket').val(data.paket);
@@ -440,7 +413,7 @@
 
             let id_pelanggan = $('#id_pelanggan').val();
             let nama_pelanggan = $('#nama_pelanggan').val();
-            let perumahan = $('#perumahan').val();
+            let perumahan_id = $('#perumahan_id').val();
             let alamat = $('#alamat').val();
             let tagihan = $('#tagihan').val();
             let paket = $('#paket').val();
@@ -461,7 +434,7 @@
                 data: {
                     id_pelanggan: id_pelanggan,
                     nama_pelanggan: nama_pelanggan,
-                    perumahan: perumahan,
+                    perumahan_id: perumahan_id,
                     alamat: alamat,
                     tagihan: tagihan,
                     paket: paket,

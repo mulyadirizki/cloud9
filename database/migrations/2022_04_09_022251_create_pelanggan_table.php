@@ -21,6 +21,8 @@ class CreatePelangganTable extends Migration
             $table->text('alamat');
             $table->string('tagihan', 50);
             $table->string('paket', 30);
+            $table->string('merk_modem', 50);
+            $table->string('sn_modem', 30);
             $table->string('tv');
             $table->string('sn', 50);
             $table->string('chip_id', 50);
@@ -30,6 +32,7 @@ class CreatePelangganTable extends Migration
             $table->string('telp_hp', 15);
             $table->string('user_id', 50);
             $table->string('password', 100);
+            $table->int('status', 4);
             $table->timestamps();
         });
     }
